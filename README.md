@@ -26,13 +26,27 @@
 
 ## 安装与打包
 
-### 安装 `.iinaplgz`
+### 从 GitHub 直接安装（推荐）
 
-用 IINA 打开包含本次实现的 `.iinaplgz`，在插件页面确认权限并启用，再打开播放器窗口。正式包包含 `Info.json`、`dist/main.js` 和 `ui/` 等运行资源。
+**不需要下载 ZIP、不需要克隆仓库，也不需要运行 Node.js。** 使用 **IINA 1.5.x**：
 
-**如果本次实现还在 PR 分支中，不要直接在 IINA 中输入仓库默认 GitHub 地址安装。** `main` 尚未包含该实现时，这种安装方式不会获取 PR。应先检出对应分支、本地打包，再安装生成的 `.iinaplgz`；合并后才能从仓库默认分支安装。
+1. 打开 **IINA → 设置（Settings）→ 插件（Plugins）**。
+2. 点击 **从 GitHub 安装（Install from GitHub）**。
+3. 粘贴仓库地址 `https://github.com/threeyang3/INNA-Notes`，或仅输入 `threeyang3/INNA-Notes`。
+4. 点击安装，核对并批准所需的本地文件权限，启用 **IINA Video Notes**。
+5. 在 IINA 中打开本地视频，使用 **插件 → IINA Video Notes → 创建视频笔记**，或按 **⌘⇧N**。
 
-官方支持安装包、GitHub 安装和开发链接，见 [IINA：Creating Plugins](https://docs.iina.io/pages/creating-plugins.html)。
+插件名称是 **IINA Video Notes**；GitHub 仓库历史名称为 **INNA-Notes**，输入仓库地址时不要更改拼写。
+
+本项目已将 `Info.json`、`dist/main.js` 和 `ui/` 运行资源直接提交在仓库根目录，IINA 无须在安装时构建。根据 IINA 1.5.0 源码，GitHub 安装先尝试最新 Release 内的 `.iinaplgz` 安装包；若没有合适的 Release 资源，则直接下载默认 `main` 分支。因此**一键安装不要求先创建 GitHub Release**。自动更新读取 `main/Info.json` 的 `ghVersion`；以后正式发布新版本应递增整数 `ghVersion`，并同步更新 `version`、已提交的构建产物及安装包。
+
+**状态说明：0.1.0 仍是待真实 Mac 验收的测试版本**。仓库可被 IINA 按官方机制下载，不等于实际 IINA/WebKit、截图或 Obsidian 闭环已经完成实机测试。遇到安装失败时请记录 IINA 版本和错误提示，并按 [Mac 验收清单](docs/MAC_ACCEPTANCE.md) 检查。
+
+### 通过本地 `.iinaplgz` 安装（备用）
+
+如 GitHub 下载失败，可使用仓库 `packages/IINA-Video-Notes-0.1.0.iinaplgz` 测试安装包，在 IINA 插件设置中选择从本地安装包安装。该包的根目录直接包含 `Info.json`、`dist/main.js`、`ui/` 等资源，另附 SHA256 校验清单。
+
+官方安装机制见 [IINA：Creating Plugins](https://docs.iina.io/pages/creating-plugins.html)。
 
 ### 从源码构建
 
@@ -42,8 +56,6 @@
 git clone https://github.com/threeyang3/INNA-Notes.git
 cd INNA-Notes
 
-# 仅在本次实现尚未合并时，切换到实现分支：
-git switch feat/iina-video-notes
 
 npm test
 npm run build
@@ -53,7 +65,7 @@ npm run package
 
 `npm run package` 生成 `.iinaplgz`，文件位置以命令输出为准。构建后的 `dist/main.js` 随仓库提交，使安装端不必构建。也可以在 Mac 上使用官方 CLI：
 
-本实现分支的 `packages/` 同时附带 0.1.0 安装包快照与 `SHA256SUMS`，可直接下载试装；它是待 Mac 验收的测试包。后续修改源码后，应重新打包，不把旧快照当作新构建。
+`packages/` 同时附带 0.1.0 安装包快照与 `SHA256SUMS`，可直接下载试装；它是待 Mac 验收的测试包。后续修改源码后，应重新打包，不把旧快照当作新构建。
 
 ```sh
 npm run build
