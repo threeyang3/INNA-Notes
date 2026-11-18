@@ -1,0 +1,19 @@
+{
+  "name": "IINA Video Notes",
+  "version": "0.1.0",
+  "identifier": "io.github.threeyang3.iina-video-notes",
+  "author": { "name": "threeyang3", "url": "https://github.com/threeyang3" },
+  "description": "本地视频截图与文字笔记，独立保存为 Markdown 和 PNG。",
+  "entry": "dist/main.js",
+  "preferencesPage": "ui/preferences.html",
+  "permissions": ["file-system", "show-alert", "show-osd"],
+  "ghRepo": "threeyang3/INNA-Notes",
+  "ghVersion": 1,
+  "preferenceDefaults": {
+    "outputPath": "",
+    "includeSubtitles": true,
+    "autoPause": false,
+    "includeSourcePath": true,
+    "shortcut": "Meta+Shift+n"
+  }
+}
