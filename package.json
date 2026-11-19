@@ -1,6 +1,6 @@
 {
   "name": "iina-video-notes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Independent local video captures for IINA 1.5.x",
   "scripts": {

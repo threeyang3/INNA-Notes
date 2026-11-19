@@ -55,7 +55,7 @@ test('the actual bundled entry starts with IINA APIs and no Node or browser glob
       removeAllItems() { menus.length = 0; },
       item(title, action, options) { return { title, action, options }; },
       addItem(item) { menus.push(item); },
-      forceUpdate() {}
+      forceUpdate() { throw new Error("PlayerCore is still initializing"); }
     },
     event: { on(name, callback) { events.push({ name, callback }); return String(events.length); } },
     utils: {

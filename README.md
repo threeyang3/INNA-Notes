@@ -4,7 +4,7 @@
 
 项目名称使用播放器的正确拼写 **IINA**；GitHub 仓库地址沿用 `threeyang3/INNA-Notes`。
 
-> **0.1.0 是首个测试版本。** 目标环境为 IINA 1.5.x，以 **IINA 1.5.0 及以上**为代码兼容性基线；已对照官方文档与 v1.5.0 源码核对 API。当前开发环境不是 macOS，模拟 API 测试和打包检查不等于真实 IINA 验收。安装、截图画质、HDR、字幕、窗口焦点和原生磁盘故障仍须按 [Mac 验收清单](docs/MAC_ACCEPTANCE.md) 检查。更早版本不在支持范围内。
+> **当前版本为 0.1.1。** 修复了插件启用后 IINA 冷启动时的菜单初始化崩溃。运行环境为 **IINA 1.5.x（最低 1.5.0）**。
 
 ## 一次笔记怎样完成
 
@@ -40,11 +40,11 @@
 
 本项目已将 `Info.json`、`dist/main.js` 和 `ui/` 运行资源直接提交在仓库根目录，IINA 无须在安装时构建。根据 IINA 1.5.0 源码，GitHub 安装先尝试最新 Release 内的 `.iinaplgz` 安装包；若没有合适的 Release 资源，则直接下载默认 `main` 分支。因此**一键安装不要求先创建 GitHub Release**。自动更新读取 `main/Info.json` 的 `ghVersion`；以后正式发布新版本应递增整数 `ghVersion`，并同步更新 `version`、已提交的构建产物及安装包。
 
-**状态说明：0.1.0 仍是待真实 Mac 验收的测试版本**。仓库可被 IINA 按官方机制下载，不等于实际 IINA/WebKit、截图或 Obsidian 闭环已经完成实机测试。遇到安装失败时请记录 IINA 版本和错误提示，并按 [Mac 验收清单](docs/MAC_ACCEPTANCE.md) 检查。
+IINA 1.5.0 已完成冷启动与视频笔记菜单的实机核验。其他原生场景的覆盖范围见 [验证记录](docs/VALIDATION.md) 和 [Mac 验收清单](docs/MAC_ACCEPTANCE.md)。
 
 ### 通过本地 `.iinaplgz` 安装（备用）
 
-如 GitHub 下载失败，可使用仓库 `packages/IINA-Video-Notes-0.1.0.iinaplgz` 测试安装包，在 IINA 插件设置中选择从本地安装包安装。该包的根目录直接包含 `Info.json`、`dist/main.js`、`ui/` 等资源，另附 SHA256 校验清单。
+从 [GitHub Releases](https://github.com/threeyang3/INNA-Notes/releases/latest) 下载 `IINA-Video-Notes-0.1.1.iinaplgz` 后用 IINA 打开，也可以在插件设置里选择“安装本地插件”。发布页同时提供 `SHA256SUMS`。
 
 官方安装机制见 [IINA：Creating Plugins](https://docs.iina.io/pages/creating-plugins.html)。
 
@@ -65,7 +65,7 @@ npm run package
 
 `npm run package` 生成 `.iinaplgz`，文件位置以命令输出为准。构建后的 `dist/main.js` 随仓库提交，使安装端不必构建。也可以在 Mac 上使用官方 CLI：
 
-`packages/` 同时附带 0.1.0 安装包快照与 `SHA256SUMS`，可直接下载试装；它是待 Mac 验收的测试包。后续修改源码后，应重新打包，不把旧快照当作新构建。
+仓库的 `packages/` 保留发布过的安装包及其 SHA-256。更新源码后，重新打包并核对发布包的版本和校验值。
 
 ```sh
 npm run build
