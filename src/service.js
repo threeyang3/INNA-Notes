@@ -31,7 +31,7 @@ class NotesSession {
   }
 
   async start() {
-    this.readSettings(); this.installMenus(); this.installEvents();
+    this.readSettings(); this.installMenus({ refresh: false }); this.installEvents();
     try {
       const version = String(this.api.core.getVersion().iina || "").split(".").map(Number);
       if (!Number.isFinite(version[0]) || version[0] < 1 || (version[0] === 1 && (!Number.isFinite(version[1]) || version[1] < 5))) {
@@ -65,14 +65,15 @@ class NotesSession {
     const roots = this.api.preferences.get("authorizedRoots");
     return Array.isArray(roots) && roots.includes(root);
   }
-  installMenus() {
+  installMenus({ refresh = true } = {}) {
     const menu = this.api.menu;
     menu.removeAllItems();
     menu.addItem(menu.item("创建视频笔记", () => this.capture(), { keyBinding: this.settings.shortcut }));
     menu.addItem(menu.item("未保存的视频笔记…", () => this.run(() => this.showDrafts())));
     menu.addItem(menu.item("视频笔记设置…", () => this.showSettings()));
     menu.addItem(menu.item("查看视频笔记输出目录", () => this.showOutput()));
-    menu.forceUpdate();
+    // IINA assembles registered entries when its plugin menu opens.
+    if (refresh) menu.forceUpdate();
   }
   listen(name, callback) { this.listeners.push([name, this.api.event.on(name, callback)]); }
   installEvents() {

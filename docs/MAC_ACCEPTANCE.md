@@ -23,9 +23,9 @@
 ## 2. 打包与安装
 
 - [ ] **从 GitHub 一键安装**：IINA → 设置 → 插件 → 从 GitHub 安装，输入 `https://github.com/threeyang3/INNA-Notes` 或 `threeyang3/INNA-Notes`，确认安装并启用。无需本地构建或先下载安装包。
-- [ ] 插件信息显示 `IINA Video Notes`、`0.1.0`、`io.github.threeyang3.iina-video-notes`；可以从插件菜单创建笔记，窗口和界面资源加载正常。
-- [ ] 查看安装日志确认安装所用来源：无 Release 时由 `main` 下载；若未来创建带 `.iinaplgz` 资源的 Release，需验证其内容与当前版本一致。
-- [ ] GitHub 安装成功后，插件的更新检查可读取默认分支 `Info.json`；本轮 `ghVersion` 为 1，不通过虚增版本制造更新提示。
+- [ ] 插件信息显示 `IINA Video Notes`、当前发布版本、`io.github.threeyang3.iina-video-notes`；可以从插件菜单创建笔记，窗口和界面资源加载正常。
+- [ ] 查看安装日志确认安装所用来源：有最新 Release 时核对 `.iinaplgz` 资产与当前版本一致。缺少相应发布资产时检查默认分支安装。
+- [ ] GitHub 安装成功后，插件的更新检查可读取默认分支 `Info.json`；核对 `ghVersion` 与该版本的发布资产一致。
 - [ ] 在实现分支执行 `npm test`、`npm run build`、`npm run check`、`npm run package`，保留终端结果。
 - [ ] 在 Mac 另运行 `/Applications/IINA.app/Contents/MacOS/iina-plugin pack .`，确认官方 CLI 接受项目结构。
 - [ ] 包顶层有 `Info.json`，`entry` 对应 `dist/main.js`，UI 文件齐全，没有额外包一层仓库目录。
